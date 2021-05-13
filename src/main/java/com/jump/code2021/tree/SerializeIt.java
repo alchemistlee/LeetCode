@@ -28,9 +28,23 @@ public class SerializeIt {
 
     public String serialize(TreeNode root){
         StringBuilder sb = new StringBuilder();
-
+        realSerialize(root,sb);
+        sb.delete(sb.length()-1,sb.length());
+        return sb.toString();
     }
 
+    private void realSerialize(TreeNode root,StringBuilder sb){
+        if(root == null){
+            sb.append("#").append(",");
+            return ;
+        }
+
+        sb.append(root.val).append(",");
+        realSerialize(root.left ,sb);
+        realSerialize(root.right, sb);
+        return;
+
+    }
 
 
 
@@ -39,6 +53,10 @@ public class SerializeIt {
         SerializeIt s = new SerializeIt();
         TreeNode t = s.deserialize(d);
         System.out.println(t);
+
+        String d1 = s.serialize(t);
+        System.out.println(d1);
+
     }
 
 
