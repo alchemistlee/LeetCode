@@ -7,7 +7,7 @@ public class GenerateTrees2 {
 
 
 
-    public class TreeNode {
+    class TreeNode {
 
         int val;
         TreeNode left;
