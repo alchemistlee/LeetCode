@@ -1,7 +1,9 @@
 package com.jump.code2021.tree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class LevelOrder {
 
@@ -58,8 +60,41 @@ public class LevelOrder {
         return res;
     }
 
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if(root==null){
+            return res;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
 
-    public static void main(String[] args){
+        while(!q.isEmpty()){
+
+            int curLevelSize = q.size();
+            List<Integer> tmpLevel = new ArrayList<>();
+
+            for(int i=0;i<curLevelSize;i++) {
+
+                TreeNode cur = q.poll();
+
+//            System.out.println(cur.val);
+                tmpLevel.add(cur.val);
+
+                if (cur.left != null) {
+                    q.offer(cur.left);
+                }
+                if (cur.right != null) {
+                    q.offer(cur.right);
+                }
+
+            }
+            res.add(tmpLevel);
+        }
+        return res;
+    }
+
+
+        public static void main(String[] args){
         TreeNode root = new TreeNode(3);
         TreeNode n1 = new TreeNode(9);
         TreeNode n2 = new TreeNode(20);
@@ -72,7 +107,7 @@ public class LevelOrder {
 //        n2.right=n4;
 
         LevelOrder l = new LevelOrder();
-        List<List<Integer>> r= l.levelOrder(root);
+        List<List<Integer>> r= l.levelOrder2(root);
         System.out.println(r);
     }
 }
