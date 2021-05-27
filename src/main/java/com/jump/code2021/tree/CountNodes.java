@@ -37,21 +37,49 @@ public class CountNodes {
         return 1+get_h(root.left);
     }
 
+    private boolean isExist(TreeNode root, int h, int k){
+        int bit = 1 << (h-1);
+        TreeNode n = root;
+        while (n!=null && bit>0){
+            if( (bit & k) == 0){
+                n= n.left;
+            }
+            else{
+                n=n.right;
+            }
+            bit  = bit >> 1;
+        }
+        if(n==null){
+            return false;
+        }
+        return true;
+
+    }
+
     public int countNodes2(TreeNode root) {
         int hIdx = get_h(root) - 1;
 
 
         //目标数的范围是[2^hidx , 2^(hidx+1)-1]
 
-        int start = Double.valueOf(Math.pow(2, hIdx)).intValue();
-        int end = Double.valueOf(Math.pow(2, hIdx + 1) - 1).intValue();
+//        int start = Double.valueOf(Math.pow(2, hIdx)).intValue();
+//        int end = Double.valueOf(Math.pow(2, hIdx + 1) - 1).intValue();
+        int start  = 1<< (hIdx);
+        int end  = (1<<(hIdx+1))-1;
 
+        while(start<end) {
 
-        while()
+            int mid = (end - start +1 )/2 + start;
 
-        int target = (end - start) / 2;
+            if(isExist(root, hIdx, mid)){
+                start = mid;
+            }
+            else{
+                end = mid-1;
+            }
 
-
+        }
+        return start;
     }
 
 
@@ -71,7 +99,9 @@ public class CountNodes {
 
 
         CountNodes c = new CountNodes();
-        int res = c.countNodes(r1);
+//        int res = c.countNodes(r1);
+        int res = c.countNodes2(r1);
+
         System.out.println(res);
     }
 }
