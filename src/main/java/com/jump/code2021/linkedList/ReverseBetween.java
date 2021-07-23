@@ -85,6 +85,31 @@ public class ReverseBetween {
 
     }
 
+    //递归版本2
+    public ListNode reverseBetween3(ListNode head, int left, int right) {
+        if(left==1){
+            return reverseTopN(head, right);
+        }
+
+        head.next = reverseBetween3(head.next, left-1,right-1);
+        return head;
+    }
+
+    private ListNode succNode;
+
+    private ListNode reverseTopN(ListNode h, int n){
+        if(n==1){
+            succNode = h.next;
+            return h;
+        }
+
+        ListNode res = reverseTopN(h.next, n-1);
+        h.next.next = h;
+        h.next = succNode;
+        return res;
+    }
+
+
 
     public static void main(String[] args){
         ListNode h1 = new ListNode();
@@ -102,8 +127,8 @@ public class ReverseBetween {
 
         ReverseBetween r1 = new ReverseBetween();
 //        ListNode res = r1.reverseBetween(h1,2,4);
-
-        ListNode res = r1.reverseBetween2(h1,2,4);
+//        ListNode res = r1.reverseBetween2(h1,2,4);
+        ListNode res = r1.reverseBetween3(h1.next,2,4);
         System.out.println(res);
     }
 }
