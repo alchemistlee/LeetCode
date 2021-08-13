@@ -1,5 +1,8 @@
 package com.jump.code2021.linkedList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetectCycle {
 
     static private class ListNode {
@@ -58,6 +61,13 @@ public class DetectCycle {
         ListNode res = d.detectCycle(n1);
 
         System.out.println(res);
+
+//        List<String>  a = new ArrayList<>();
+//        a.add("sss");
+//        a.add("ddd");
+//
+//        String[] b= a.toArray(new String[0]);
+
 
     }
 }
