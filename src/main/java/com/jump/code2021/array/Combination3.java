@@ -36,10 +36,14 @@ public class Combination3 {
         tmp.addAll(path);
         for(int i=0;i<candidate.size();i++){
             tmp.add(candidate.get(i));
-            List<Integer> tmpCandidate =new ArrayList<>();
-            tmpCandidate.addAll(candidate);
-            tmpCandidate.remove(i);
+
+            List<Integer> tmpCandidate =candidate.subList(i+1,candidate.size());
+//            List<Integer> tmpCandidate =new ArrayList<>();
+//            tmpCandidate.addAll(candidate);
+//            tmpCandidate.remove(i);
+
             backtrack(tmpCandidate,tmp,pathSum+candidate.get(i));
+
             tmp.remove(tmp.size()-1);
         }
 
@@ -49,7 +53,7 @@ public class Combination3 {
 
     public static void main(String[] args){
         Combination3 c3 = new Combination3();
-        List<List<Integer>> r = c3.combinationSum3(3,7);
+        List<List<Integer>> r = c3.combinationSum3(3,9);
 
     }
 }
